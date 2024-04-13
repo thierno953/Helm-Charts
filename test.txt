@@ -1,0 +1,8 @@
+kind create cluster --name kind-cluster --config kind-config.yml
+kind delete cluster -n kind-cluster
+
+helm create ui-deploy
+helm template dev-templ -f ./ui-deploy/values-dev.yaml ./ui-deploy --debug
+helm template dev-templ -f ./ui-deploy/values-dev.yaml ./ui-deploy > dev.yaml 
+helm template dev-templ -f ./ui-deploy/values-qa.yaml ./ui-deploy > qa.yaml 
+helm template dev-templ -f ./ui-deploy/values-prod.yaml ./ui-deploy > prod.yaml 
